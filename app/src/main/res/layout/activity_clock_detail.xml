@@ -40,9 +40,9 @@
             android:textSize="29sp" />
         <Button
             android:id="@+id/set_time"
-            android:text="设置时间"
-            android:background="@drawable/button_shape"
-            android:textColor="#fff"
+            android:text="設定時間"
+            android:background="@android:color/holo_blue_light"
+            android:textColor="#ffffd0"
             android:textSize="18sp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="35dp"
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="标签"
+            android:text="標籤"
             android:textSize="20sp" />
 
         <EditText
@@ -73,13 +73,14 @@
 
 
     </LinearLayout>
+
     <Button
         android:id="@+id/save"
-        android:text="保存"
+        android:text="儲     存"
         android:textSize="20sp"
-        android:textColor="#fff"
+        android:textColor="#f0ffff"
         android:textStyle="bold"
-        android:background="@drawable/button_shape"
+        android:background="@android:color/holo_purple"
         android:layout_marginTop="35dp"
         android:layout_gravity="center"
         android:layout_marginLeft="35dp"
@@ -89,14 +90,14 @@
 
     <Button
         android:id="@+id/delete"
-        android:text="删除"
+        android:text="刪     除"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
         android:textSize="20sp"
-        android:textColor="#fff"
+        android:textColor="#f0ffff"
         android:textStyle="bold"
-        android:background="@drawable/button_shape"
+        android:background="@android:color/holo_purple"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

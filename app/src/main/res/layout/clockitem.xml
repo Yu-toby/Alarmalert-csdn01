@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/time"
             android:layout_marginLeft="15dp"
-            android:text="代办事项"
+            android:text="代辦事項"
             android:textColor="@color/colorBlack"
             android:textSize="18sp" />
 

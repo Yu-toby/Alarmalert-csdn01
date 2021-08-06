@@ -5,7 +5,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.icu.util.ValueIterator;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -19,12 +18,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import static android.content.Context.ALARM_SERVICE;
-import static com.example.dell.alarmalert_csdn.MainActivity.timeAdapter;
 
 public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
     List<Clock> list;
@@ -50,7 +47,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
 
     @SuppressLint({"ResourceAsColor", "SetTextI18n"})
     @Override
-    public void onBindViewHolder(@NonNull final TimeAdapter.ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final TimeAdapter.ViewHolder viewHolder, @SuppressLint("RecyclerView") final int i) {
         final Clock clock = list.get(i);
         pos = i;
 
@@ -90,7 +87,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
                     clock.setClockType(Clock.clock_open);
                     //clock.updateAll();
                     clock.save();
-                    Toast.makeText(context, "开启闹钟", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "開啟鬧鐘", Toast.LENGTH_SHORT).show();
                     viewHolder.hour.setTextColor(context.getResources().getColor(R.color.colorBlack));
                     viewHolder.minute.setTextColor(context.getResources().getColor(R.color.colorBlack));
                     viewHolder.net.setTextColor(context.getResources().getColor(R.color.colorBlack));
@@ -121,14 +118,14 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.ViewHolder> {
                     clock.save();
                     Log.e("status------",clock.getHour()+clock.getMinute()+clock.getMinute()+clock.getClockType()+"");
 
-                    Log.e("关闭闹钟",clock.getClockType()+"");
+                    Log.e("關閉鬧鐘",clock.getClockType()+"");
                     Intent intent = new Intent(context, CallAlarm.class);
                     PendingIntent sender=PendingIntent.getBroadcast(
                             context,0, intent, 0);
                     AlarmManager am;
                     am =(AlarmManager)context.getSystemService(ALARM_SERVICE);
                     am.cancel(sender);
-                    Toast.makeText(context, "关闭闹钟", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "關閉鬧鐘", Toast.LENGTH_SHORT).show();
                     viewHolder.hour.setTextColor(context.getResources().getColor(R.color.colorGray));
                     viewHolder.minute.setTextColor(context.getResources().getColor(R.color.colorGray));
                     viewHolder.net.setTextColor(context.getResources().getColor(R.color.colorGray));

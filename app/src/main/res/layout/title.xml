@@ -3,7 +3,9 @@
     android:layout_height="?attr/actionBarSize"
     android:layout_marginTop="22dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
     <android.support.v7.widget.Toolbar
         app:contentInsetStart="0dp"
         android:layout_width="match_parent"

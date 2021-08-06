@@ -1,15 +1,12 @@
 package com.example.dell.alarmalert_csdn;
 
-import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,8 +17,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
-
-import javax.security.auth.login.LoginException;
 
 import static com.example.dell.alarmalert_csdn.MainActivity.list;
 import static com.example.dell.alarmalert_csdn.MainActivity.timeAdapter;
@@ -54,7 +49,7 @@ public class AddClock extends AppCompatActivity implements View.OnClickListener 
         back.setImageResource(R.drawable.ic_back);
         back.setOnClickListener(this);
         title = findViewById(R.id.title);
-        title.setText("添加闹钟");
+        title.setText("新增鬧鐘");
         save.setOnClickListener(this);
         calendar = Calendar.getInstance();
 
@@ -88,11 +83,12 @@ public class AddClock extends AppCompatActivity implements View.OnClickListener 
                 }, mhour, mminute, true).show();
                 break;
             case R.id.save:
+                Log.v("wyc","save");
                 Intent intent = new Intent(AddClock.this, CallAlarm.class);
                 PendingIntent sender = PendingIntent.getBroadcast(
                         AddClock.this, 0, intent, 0);
-                AlarmManager am;
-                am = (AlarmManager) getSystemService(ALARM_SERVICE);
+                Log.v("wyc","send");
+                AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     if (System.currentTimeMillis()>calendar.getTimeInMillis()+40000){
                         //加24小时
@@ -112,7 +108,7 @@ public class AddClock extends AppCompatActivity implements View.OnClickListener 
                     Log.e("Listnumber======",list.size()+"");
                     finish();
                 }else {
-                    Toast.makeText(this, "请选择闹钟时间", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "請設定時間", Toast.LENGTH_SHORT).show();
                 }
 
                 break;

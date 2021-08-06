@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:text="null"
+            android:text="00"
             android:textSize="39sp" />
 
         <TextView
@@ -36,18 +36,19 @@
             android:layout_marginTop="7dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="null"
+            android:text="00"
             android:textSize="29sp" />
         <Button
             android:id="@+id/set_time"
-            android:text="设置时间"
+            android:text="設定時間"
             android:textStyle="bold"
-            android:textColor="#fff"
+            android:textSize="18sp"
+            android:textColor="#ffffd0"
             android:layout_alignParentRight="true"
             android:layout_marginRight="35dp"
-            android:background="@drawable/button_shape"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:background="@android:color/holo_blue_light"
+            android:layout_width="100dp"
+            android:layout_height="50dp" />
 
 
     </RelativeLayout>
@@ -60,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="标签"
+            android:text="標籤"
             android:textSize="20sp" />
 
         <EditText
@@ -73,14 +74,15 @@
 
 
     </LinearLayout>
+
     <Button
         android:id="@+id/save"
         android:layout_marginTop="18sp"
-        android:text="保存"
+        android:text="儲     存"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#fff"
-        android:background="@drawable/button_shape"
+        android:textColor="#f0ffff"
+        android:background="@android:color/holo_purple"
         android:layout_gravity="center"
         android:layout_margin="35dp"
         android:layout_width="match_parent"

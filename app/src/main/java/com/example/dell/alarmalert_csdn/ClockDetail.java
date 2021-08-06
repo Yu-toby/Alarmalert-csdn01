@@ -6,11 +6,9 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -58,7 +56,7 @@ public class ClockDetail extends AppCompatActivity implements View.OnClickListen
         back.setOnClickListener(this);
         back.setImageResource(R.drawable.ic_back);
         title = findViewById(R.id.title);
-        title.setText("闹钟详情");
+        title.setText("編輯鬧鐘");
         calendar = Calendar.getInstance();
         initView();
 
