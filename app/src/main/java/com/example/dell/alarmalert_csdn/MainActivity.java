@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -49,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<ScannedData> findDevice = new ArrayList<>();
     private String mDeviceAddress = "54:6C:0E:9B:5C:79";
     TextView tvRssi;
+    private int[] array;
+    private int rssiAvg,count=0,seat=0;
+
 
 //    public static AlarmAlert.Leave notice = new AlarmAlert.Leave();
 
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         /**Beacon*/
         tvRssi = findViewById(R.id.tvRssi);
+        array = new int[6];
 
         /**權限相關認證*/
         checkPermission();
@@ -204,18 +209,31 @@ public class MainActivity extends AppCompatActivity {
             new Thread(()->{
 //                SystemClock.sleep(1000);
                 if (device.getAddress().equals(mDeviceAddress)) {
-//                    Log.v("wyc","rssi" + String.valueOf(rssi));
-                    if (Math.abs(rssi)>=40){
-//                        AlarmAlert.Leave notice = new AlarmAlert.Leave();
-//                        notice.Isleave(true);
+
+                    if (count<6){
+                        array[count] = rssi;
+                        count++;
                     }
-                    else{
-//                        AlarmAlert.Leave notice = new AlarmAlert.Leave();
-//                        notice.Isleave(false);
+                    else {
+                        array[seat] = rssi;
+                        seat++;
+                        if (seat>=6) {
+                            seat = 0;
+                        }
+                    }
+
+                    if (count>=5) {
+                        Log.v("wyc","array : " +array[0] +" " + array[1] +" " + array[2] +" " + array[3] +" " + array[4] +" " + array[5]);
+                        /** 15個數的和 */
+                        rssiAvg = 0;
+                        for (int i = 0; i <6; i++) {
+                            rssiAvg += array[i];
+                        }
+                        Log.v("wyc","array : " +rssiAvg/6);
                     }
 
                     runOnUiThread(()->{
-                        tvRssi.setText(String.valueOf(rssi));
+                        tvRssi.setText(String.valueOf(rssiAvg/6));
                     });
                 }
             }).start();

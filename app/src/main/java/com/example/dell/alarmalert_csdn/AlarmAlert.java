@@ -38,7 +38,8 @@ public class AlarmAlert extends Activity {
     private boolean isScanning = false;
     ArrayList<ScannedData> findDevice = new ArrayList<>();
     private String mDeviceAddress = "54:6C:0E:9B:5C:79";
-
+    private int[] array;
+    private int rssiAvg,count1=0,seat=0;
     Leave notice = new Leave();
 
     @Override
@@ -46,6 +47,7 @@ public class AlarmAlert extends Activity {
         super.onCreate(savedInstanceState);
 
         /**Beacon*/
+        array = new int[6];
 
         /**權限相關認證*/
         checkPermission();
@@ -140,20 +142,43 @@ public class AlarmAlert extends Activity {
                 if (device.getAddress().equals(mDeviceAddress)) {
 //                    Log.v("wyc","rssi" + String.valueOf(rssi));
 
-                    /**判斷是否離開*/
-                    if (Math.abs(rssi)>=80){        //設定離開範圍
-                        notice.Isleave(true);
-                        count++;
-                        checkleave++;
-                        Log.v("wyc","Isleave : " + notice.getLeave());
-                        Log.v("wyc","count : " + count);
+                    if (count1<6){
+                        array[count1] = rssi;
+                        count1++;
                     }
-                    else{
-                        notice.Isleave(false);
-                        count++;
-                        Log.v("wyc","Isleave : " + notice.getLeave());
-                        Log.v("wyc","count : " + count);
+                    else {
+                        array[seat] = rssi;
+                        seat++;
+                        if (seat>=6) {
+                            seat = 0;
+                        }
                     }
+
+                    if (count1>=5) {
+//                        Log.v("wyc","array : " + array[0] + array[1] + array[2] + array[3] + array[4] + array[5]);
+                        /** 15個數的和 */
+                        rssiAvg = 0;
+                        for (int i = 0; i < 6; i++) {
+                            rssiAvg += array[i];
+                        }
+//                        Log.v("wyc","array : " +rssiAvg/6);
+
+                        /**判斷是否離開*/
+                        if (Math.abs(rssiAvg / 6) >= 60) {        //設定離開範圍
+                            notice.Isleave(true);
+                            count++;
+                            checkleave++;
+                            Log.v("wyc", "Isleave : " + notice.getLeave());
+                            Log.v("wyc", "count : " + count);
+                        } else {
+                            notice.Isleave(false);
+                            count++;
+                            Log.v("wyc", "Isleave : " + notice.getLeave());
+                            Log.v("wyc", "count : " + count);
+                        }
+
+                    }
+
 
                     runOnUiThread(()->{
                     });
@@ -215,19 +240,12 @@ public class AlarmAlert extends Activity {
 
         int position = getIntent().getIntExtra("position",-1);
 
-//        do{
-//            Log.v("wyc","isleave : " + notice.getLeave());
-//            try{
-//                // delay 0.5 second
-//                Thread.sleep(500);
-//            } catch(InterruptedException e){
-//                e.printStackTrace();
-//            }
-//            if (!notice.getLeave()){
-//                checkleave = false;
-//            }
-//            count ++;
-//        }while (count<6);
+//        try{
+//            // delay 0.5 second
+//            Thread.sleep(500);
+//        } catch(InterruptedException e){
+//            e.printStackTrace();
+//        }
 
         Log.v("wyc","check : " + checkleave);
 
