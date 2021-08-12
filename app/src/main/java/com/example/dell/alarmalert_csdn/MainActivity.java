@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tvRssi;
     private int[] array;
     private int rssiAvg,count=0,seat=0;
+    private int avgnum=15;          //平均數
 
 
 //    public static AlarmAlert.Leave notice = new AlarmAlert.Leave();
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         /**Beacon*/
         tvRssi = findViewById(R.id.tvRssi);
-        array = new int[6];
+        array = new int[avgnum];
 
         /**權限相關認證*/
         checkPermission();
@@ -210,30 +211,30 @@ public class MainActivity extends AppCompatActivity {
 //                SystemClock.sleep(1000);
                 if (device.getAddress().equals(mDeviceAddress)) {
 
-                    if (count<6){
+                    if (count<avgnum){
                         array[count] = rssi;
                         count++;
                     }
                     else {
                         array[seat] = rssi;
                         seat++;
-                        if (seat>=6) {
+                        if (seat>=avgnum) {
                             seat = 0;
                         }
                     }
 
-                    if (count>=5) {
+                    if (count>=avgnum-1) {
                         Log.v("wyc","array : " +array[0] +" " + array[1] +" " + array[2] +" " + array[3] +" " + array[4] +" " + array[5]);
-                        /** 15個數的和 */
+                        /** 10個數的和 */
                         rssiAvg = 0;
-                        for (int i = 0; i <6; i++) {
+                        for (int i = 0; i <avgnum; i++) {
                             rssiAvg += array[i];
                         }
-                        Log.v("wyc","array : " +rssiAvg/6);
+                        Log.v("wyc","array : " +rssiAvg/avgnum);
                     }
 
                     runOnUiThread(()->{
-                        tvRssi.setText(String.valueOf(rssiAvg/6));
+                        tvRssi.setText(String.valueOf(rssiAvg/avgnum));
                     });
                 }
             }).start();

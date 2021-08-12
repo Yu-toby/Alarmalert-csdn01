@@ -37,9 +37,11 @@ public class AlarmAlert extends Activity {
     private static final int REQUEST_ENABLE_BT = 2;
     private boolean isScanning = false;
     ArrayList<ScannedData> findDevice = new ArrayList<>();
-    private String mDeviceAddress = "54:6C:0E:9B:5C:79";
+    private String mDeviceAddress = "54:6C:0E:9B:5C:79";        //裝置address
     private int[] array;
     private int rssiAvg,count1=0,seat=0;
+    private int avgnum=10;          //平均數
+
     Leave notice = new Leave();
 
     @Override
@@ -47,7 +49,7 @@ public class AlarmAlert extends Activity {
         super.onCreate(savedInstanceState);
 
         /**Beacon*/
-        array = new int[6];
+        array = new int[avgnum];
 
         /**權限相關認證*/
         checkPermission();
@@ -142,29 +144,29 @@ public class AlarmAlert extends Activity {
                 if (device.getAddress().equals(mDeviceAddress)) {
 //                    Log.v("wyc","rssi" + String.valueOf(rssi));
 
-                    if (count1<6){
+                    if (count1<avgnum){
                         array[count1] = rssi;
                         count1++;
                     }
                     else {
                         array[seat] = rssi;
                         seat++;
-                        if (seat>=6) {
+                        if (seat>=avgnum) {
                             seat = 0;
                         }
                     }
 
-                    if (count1>=5) {
+                    if (count1>=avgnum-1) {
 //                        Log.v("wyc","array : " + array[0] + array[1] + array[2] + array[3] + array[4] + array[5]);
-                        /** 15個數的和 */
+                        /** 10個數的和 */
                         rssiAvg = 0;
-                        for (int i = 0; i < 6; i++) {
+                        for (int i = 0; i < avgnum; i++) {
                             rssiAvg += array[i];
                         }
 //                        Log.v("wyc","array : " +rssiAvg/6);
 
                         /**判斷是否離開*/
-                        if (Math.abs(rssiAvg / 6) >= 60) {        //設定離開範圍
+                        if (Math.abs(rssiAvg / avgnum) >= 60) {        //設定離開範圍
                             notice.Isleave(true);
                             count++;
                             checkleave++;
