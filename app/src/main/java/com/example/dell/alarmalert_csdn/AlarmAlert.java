@@ -40,7 +40,7 @@ public class AlarmAlert extends Activity {
     private String mDeviceAddress = "54:6C:0E:9B:5C:79";        //裝置address
     private int[] array;
     private int rssiAvg,count1=0,seat=0;
-    private int avgnum=10;          //平均數
+    private int avgnum=15;          //平均數
 
     Leave notice = new Leave();
 
