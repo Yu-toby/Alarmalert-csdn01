@@ -192,16 +192,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**避免跳轉後掃描程序係續浪費效能，因此離開頁面後即停止掃描*/
-    @SuppressLint("NewApi")
-    @Override
-    protected void onStop() {
-        super.onStop();
-//        final Button btScan = findViewById(R.id.button_Scan);
-        /**關閉掃描*/
-        isScanning = false;
-//        btScan.setText("開始掃描");
-        mBluetoothAdapter.stopLeScan(mLeScanCallback);
-    }
+//    @SuppressLint("NewApi")
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+////        final Button btScan = findViewById(R.id.button_Scan);
+//        /**關閉掃描*/
+//        isScanning = false;
+////        btScan.setText("開始掃描");
+//        mBluetoothAdapter.stopLeScan(mLeScanCallback);
+//    }
 
     private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
         @Override
