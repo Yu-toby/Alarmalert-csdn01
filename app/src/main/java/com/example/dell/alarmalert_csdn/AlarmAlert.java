@@ -133,7 +133,7 @@ public class AlarmAlert extends Activity {
 //        isScanning = false;
 ////        btScan.setText("開始掃描");
 //        mBluetoothAdapter.stopLeScan(mLeScanCallback);
-//    }
+//    } 
 
     private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
         @Override
